@@ -1,0 +1,30 @@
+AR_arduino_digital<-function(arduino,batch=NULL){
+   if(is.null(batch)){
+	  ans<-inpboxk7k7(c('DA1','DA2','DA4','DA7','DA8','DA12','DA13',
+						           'DO1','DO2','DO4','DO7','DO8','DO12','DO13'),
+					          c('Input','Output'),
+						        arduino$ansdigital)
+	  arduino$ansdigital<-c(as.numeric(ans[[1]]),as.numeric(ans[[2]]))
+   }else{
+    ans<-batch
+   }
+   if(!is.null(ans)){
+    v<-rep('',14)
+    if(ans[[1]][1])v[1]<-'2/2/0/'
+    if(ans[[1]][2])v[2]<-'2/2/1/'
+    if(ans[[1]][3])v[3]<-'2/2/2/'
+    if(ans[[1]][4])v[4]<-'2/2/3/'
+    if(ans[[1]][5])v[5]<-'2/2/4/'
+    if(ans[[1]][6])v[6]<-'2/2/5/'
+    if(ans[[1]][7])v[7]<-'2/2/5/'
+    if(ans[[2]][1])v[8]<-'1/2/3/'
+    if(ans[[2]][2])v[9]<-'1/2/5/'
+    if(ans[[2]][3])v[10]<-'1/2/6/'
+    if(ans[[2]][4])v[11]<-'1/2/9/'
+    if(ans[[2]][5])v[12]<-'1/2/10/'
+    if(ans[[2]][6])v[13]<-'1/2/11/'
+    if(ans[[2]][7])v[14]<-'1/2/11/'
+    arduino$digital<-v
+    return(arduino)
+  }
+}

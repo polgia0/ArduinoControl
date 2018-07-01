@@ -1,0 +1,27 @@
+AR_arduino_analog<-function(arduino,batch=NULL){
+  if(is.null(batch)){
+    ans<-inpboxk6k6e6(c('A0','A1','A2','A3','A4','A5','O3','O5','O6','O9','O10','O11',rep(' Volts ',6)),
+                      c('Input','Output'),
+                      arduino$ansanalog)
+    arduino$ansanalog<-c(as.numeric(ans[[3]]),as.numeric(ans[[1]]),as.numeric(ans[[2]]))
+  }else{
+    ans<-batch
+  }
+  if(!is.null(ans)){
+    v<-rep('',12)
+    if(ans[[1]][1])v[1]<-'2/1/0/'
+    if(ans[[1]][2])v[2]<-'2/1/1/'
+    if(ans[[1]][3])v[3]<-'2/1/2/'
+    if(ans[[1]][4])v[4]<-'2/1/3/'
+    if(ans[[1]][5])v[5]<-'2/1/4/'
+    if(ans[[1]][6])v[6]<-'2/1/5/'
+    if(ans[[2]][1])v[7]<-paste('1/1/3/',ans[[3]][1],'/',sep='')
+    if(ans[[2]][2])v[8]<-paste('1/1/5/',ans[[3]][2],'/',sep='')
+    if(ans[[2]][3])v[9]<-paste('1/1/6/',ans[[3]][3],'/',sep='')
+    if(ans[[2]][4])v[10]<-paste('1/1/9/',ans[[3]][4],'/',sep='')
+    if(ans[[2]][5])v[11]<-paste('1/1/10/',ans[[3]][5],'/',sep='')
+    if(ans[[2]][6])v[12]<-paste('1/1/11/',ans[[3]][6],'/',sep='')
+    arduino$analog<-v
+    return(arduino)
+  }
+}
